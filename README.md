@@ -162,13 +162,14 @@ mininet> sh ovs-ofctl dump-flows r2
 
 ### Contributing
 
-This project exists thanks to all people who contribute.
-[List](./CONTRIBUTORS) of all contributors.
+The Contributors of this project are the following:
+- Georgios Fragkos: gfragkos@unm.edu 
+- Nathan Patrizi  : npatrizi@unm.edu 
 
-For all public users, please create issues or send pull requests on [Github](https://github.com/stevelorenz/comnetsemu).
 
 ### Contact
 
 Project main maintainers:
 
-- Zuo Xiang: zuo.xiang@tu-dresden.de
+- Georgios Fragkos: gfragkos@unm.edu 
+- Nathan Patrizi  : npatrizi@unm.edu 
