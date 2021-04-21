@@ -5,6 +5,7 @@ from mininet.net import Mininet
 from mininet.node import OVSKernelSwitch, RemoteController
 from mininet.cli import CLI
 from mininet.link import TCLink
+import subprocess
 
 
 class NetworkSlicingTopo(Topo):
@@ -14,7 +15,7 @@ class NetworkSlicingTopo(Topo):
 
         # Create template host, switch, and link
         host_config = dict(inNamespace=True)
-        link_config = dict(bw=10)  # Total Capacity of the link ~ 10Mbps
+        link_config = dict()  # Total Capacity of the link ~ 10Mbps
         host_link_config = dict()
 
         # Create router nodes ~ 2 router nodes in our case
@@ -25,6 +26,8 @@ class NetworkSlicingTopo(Topo):
         # Create host nodes ~ 3 clients + 3 servers = 6 Host Nodes
         for i in range(6):
             self.addHost("h%d" % (i + 1), **host_config) # We choose 'h' because 'c' is the controller
+            
+ 
 
 
 
@@ -40,6 +43,8 @@ class NetworkSlicingTopo(Topo):
         self.addLink("h6", "r2", **host_link_config)
 
 
+
+
 topos = {"networkslicingtopo": (lambda: NetworkSlicingTopo())}
 
 if __name__ == "__main__":
@@ -48,7 +53,9 @@ if __name__ == "__main__":
         topo=topo,
         # We specify an external controller by passing the Controller object in the Mininet constructor
         # This was added in Mininet 2.2.0 and above.
-        controller=RemoteController( 'c0', ip='127.0.0.1', port=6633), 
+        
+        # SOS Note: Do not specify port -- Default: 6653
+        controller=RemoteController( 'c0', ip='127.0.0.1'), 
         switch=OVSKernelSwitch,
         build=False,
         autoSetMacs=True,
@@ -62,5 +69,6 @@ if __name__ == "__main__":
     
     net.build()
     net.start()
+    subprocess.call("./common_scenario.sh")
     CLI(net)
     net.stop()
