@@ -19,16 +19,19 @@ class TrafficSlicing(app_manager.RyuApp):
     def __init__(self, *args, **kwargs):
         super(TrafficSlicing, self).__init__(*args, **kwargs)
 
-        # Destination Mapping
+        # Destination Mapping [router --> MAC Destination --> Eth Port Output]
         self.mac_to_port = {
             1: {"00:00:00:00:00:01": 2, "00:00:00:00:00:02": 3, "00:00:00:00:00:03": 4, "00:00:00:00:00:04": 1, "00:00:00:00:00:05": 1, "00:00:00:00:00:06": 1},
             2: {"00:00:00:00:00:04": 2, "00:00:00:00:00:05": 3, "00:00:00:00:00:06": 4, "00:00:00:00:00:01": 1, "00:00:00:00:00:02": 1, "00:00:00:00:00:03": 1},
         }
         
-        self.emergency = 0
-        self.time = time.time()
-        self.print_flag = 0
+        self.emergency = 0          # Boolean that indicates the presence of an emergency scenario
+        self.time = time.time()     # Timer that keeps track of time for an emergency scenario
         
+        self.print_flag = 0         # Helper variable that helps us with printing/output
+        
+        # Creation of an additional thread that automates the process for Emergecy Scenario and Normal Scenario!
+        # Listens to the timer() function.  
         self.threadd = threading.Thread(target=self.timer, args=())
         self.threadd.daemon = True
         self.threadd.start()
@@ -157,21 +160,22 @@ class TrafficSlicing(app_manager.RyuApp):
                     self.add_flow(datapath, 1, match, actions)
                     self._send_package(msg, datapath, in_port, actions)
                     
+    # Function that automates the alternation between Emergency and Non-Emergency Scenario                
     def timer(self):
         while True:
-            time.sleep(40)
+            time.sleep(40)                              # For 40 seconds we have the Normal/Non-Emergency Scenario
             print()
             print('                ***Emergency***                ')
             self.emergency = 1
-            subprocess.call("./sos_scenario.sh")
+            subprocess.call("./sos_scenario.sh")        # Creating the third slice
             self.print_flag = 0
-            time.sleep(40)
+            time.sleep(40)                              # For 40 seconds we have the Emergency Scenario
             print(' ')
             print('Update: 40 seconds have passed.')
             print('Ending the Emergency Scenario...')
             print('Recreate the initial Network Slicing...')
             print(' ')    
-            subprocess.call("./common_scenario.sh")
+            subprocess.call("./common_scenario.sh")     # End of Emergency - Return to 2 slices
             self.emergency = 0
             self.time = time.time()
 
