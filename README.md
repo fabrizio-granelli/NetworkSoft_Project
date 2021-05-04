@@ -3,7 +3,7 @@
 ## Short Introduction ##
 This is Project #1 for UNM ECE-595 Network Softwarization. The goal of this project is to demonstrate how to implement a network slicing strategy in order to adapt to an emergency situation within Comnetsemu environment. The original Comnetsemu source code with all the detailed examples can be found [here](https://git.comnets.net/public-repo/comnetsemu.git). 
 
-*First you should follow all the respective instructions indicated in the README.md file of the aforementioned link in order to build and install comnetsemu environment.*
+*First you should follow all the respective instructions indicated in the [README.md](https://git.comnets.net/public-repo/comnetsemu/-/blob/master/README.md) file of the aforementioned link in order to build and install comnetsemu environment.*
 
 Our project implementation can be found with /app/realizing_network_slicing:
 ```bash
