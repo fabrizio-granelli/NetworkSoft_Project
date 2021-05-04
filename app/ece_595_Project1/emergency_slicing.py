@@ -114,24 +114,6 @@ class TrafficSlicing(app_manager.RyuApp):
                     self._send_package(msg, datapath, in_port, actions)
 
 
-                elif pkt.get_protocol(icmp.icmp):
-                    in_port = msg.match["in_port"]
-
-                    if (in_port in self.port_to_port[dpid]):
-                        out_port = self.port_to_port[dpid][in_port]
-                    else:
-                        out_port = self.mac_to_port[dpid][dst]
-                    match = datapath.ofproto_parser.OFPMatch(
-                        in_port=in_port,
-                        eth_dst=dst,
-                        eth_src=src,
-                        eth_type=ether_types.ETH_TYPE_IP,
-                        ip_proto=0x01,  # icmp
-                    )
-                    actions = [datapath.ofproto_parser.OFPActionOutput(out_port)]
-                    self.add_flow(datapath, 1, match, actions)
-                    self._send_package(msg, datapath, in_port, actions)
-
                 
             else:                    
                 if dst in self.mac_to_port[dpid]:
@@ -141,24 +123,6 @@ class TrafficSlicing(app_manager.RyuApp):
                     self.add_flow(datapath, 1, match, actions)
                     self._send_package(msg, datapath, in_port, actions)
 
-
-                elif pkt.get_protocol(icmp.icmp):
-                    in_port = msg.match["in_port"]
-
-                    if (in_port in self.port_to_port[dpid]):
-                        out_port = self.port_to_port[dpid][in_port]
-                    else:
-                        out_port = self.mac_to_port[dpid][dst]
-                    match = datapath.ofproto_parser.OFPMatch(
-                        in_port=in_port,
-                        eth_dst=dst,
-                        eth_src=src,
-                        eth_type=ether_types.ETH_TYPE_IP,
-                        ip_proto=0x01,  # icmp
-                    )
-                    actions = [datapath.ofproto_parser.OFPActionOutput(out_port)]
-                    self.add_flow(datapath, 1, match, actions)
-                    self._send_package(msg, datapath, in_port, actions)
                     
     # Function that automates the alternation between Emergency and Non-Emergency Scenario                
     def timer(self):
