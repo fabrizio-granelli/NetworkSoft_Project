@@ -5,10 +5,8 @@ This is Project #1 for UNM ECE-595 Network Softwarization. The goal of this proj
 
 *First you should follow all the respective instructions indicated in the [README.md](https://git.comnets.net/public-repo/comnetsemu/-/blob/master/README.md) file of the aforementioned link in order to build and install comnetsemu environment.*
 
-Our project implementation can be found with /app/realizing_network_slicing:
-```bash
-$ cd ./app/realizing_network_slicing
-```
+Our project implementation can be found within this directory!
+
 
 A multi-hop technology us used for this emulation, i.e., we assume that there are 6 hosts (h1, h2, h3 ,h4, h5, h6) and two routers (r1, r2) in the network:
 
@@ -46,7 +44,7 @@ This folder contains the following files:
 4. emergency_slicing.py: Application that utilizes the aforementioned scripts in an automatic manner, in order to dynamically implement the network slicing strategy for the emergency communication.
 
 ### How to Run ###
-You can simply run the emulation application with the following commands within the /home/vagrant/comnetsemu/app/realizing_network_slicing.
+You can simply run the emulation application with the following commands within the /home/vagrant/comnetsemu/app/ece_595_Project1.
 
 1. Enabling Ryu controller to load the application and to run in the background:
 ```bash
