@@ -7,7 +7,7 @@ This is Project #1 for UNM ECE-595 Network Softwarization. The goal of this proj
 
 Our project implementation can be found within [/app/ece_595_Project1](https://github.com/geofragkos/NetworkSoft_Project/tree/master/app/ece_595_Project1):
 ```bash
-$ cd ./app/realizing_network_slicing
+$ cd ./app/ece_595_Project1
 ```
 
 A multi-hop technology us used for this emulation, i.e., we assume that there are 6 hosts (h1, h2, h3 ,h4, h5, h6) and two routers (r1, r2) in the network:
