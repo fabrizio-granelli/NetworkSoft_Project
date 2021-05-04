@@ -155,6 +155,15 @@ mininet> sh ovs-ofctl dump-flows r2
 ```
 
 ## Implementation Details ##
+In this project we consider that exist three pairs of client-servers, i.e., (h1, h4), (h2, h5) and (h3, h6), where the last pair is activated only in the emergency scenario. As a result, during a non-emergency scenario the routers r1 and r2 drop the packets that come from h3 and h6. Additionally, we consider that only the hosts in each pair can communicate with each other. 
+
+Non-emergency scenario: Only 2 slices are available for the communication of (h1, h4) and (h2, h5) respectively. Each slice equally shares the total capacity (10Mbps) to 5Mbps and 5Mbps respectively. In order to simulate the aforementioned network slicing we consider two virtual queues in both r1 and r2, thus simulating the two network slices. 
+
+Emergency Scenario: A new slice is built for the emergency communication of (h3, h6) and the respective bandwidth is equal to 4Mbps. The other two slices' bandwidth is reduced to 3Mbps and 3Mpbs respectively during this scenario. Once this emergency scenario is gone then the capacity is back to normal and the new third slice is disabled. 
+
+Assumption: We assume that (h1, h4) and (h2, h5) only use 50% of the slices' capacity, i.e., 2.5Mbps. As a result, even in the emergency scenario there will be no problem with the channels.
+
+Note: In order to enable the ryu manager to listen to all the available functions in the emergency_slicing.py but also to automate the process of creating a new channel during an emergency scenario we create an additional thread (except the main thread). This thread is responsible to automate the process of activateing/deactivating the emergency scenario every K seconds. 
 
 ### [FAQ](./doc/faq.md)
 
