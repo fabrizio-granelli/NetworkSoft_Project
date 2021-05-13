@@ -127,15 +127,15 @@ class TrafficSlicing(app_manager.RyuApp):
     # Function that automates the alternation between Emergency and Non-Emergency Scenario                
     def timer(self):
         while True:
-            time.sleep(40)                              # For 40 seconds we have the Normal/Non-Emergency Scenario
+            time.sleep(60)                              # For 40 seconds we have the Normal/Non-Emergency Scenario
             print()
             print('                ***Emergency***                ')
             self.emergency = 1
             subprocess.call("./sos_scenario.sh")        # Creating the third slice
             self.print_flag = 0
-            time.sleep(40)                              # For 40 seconds we have the Emergency Scenario
+            time.sleep(60)                              # For 40 seconds we have the Emergency Scenario
             print(' ')
-            print('Update: 40 seconds have passed.')
+            print('Update: 60 seconds have passed.')
             print('Ending the Emergency Scenario...')
             print('Recreate the initial Network Slicing...')
             print(' ')    
