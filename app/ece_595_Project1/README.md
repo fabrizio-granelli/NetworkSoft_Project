@@ -133,13 +133,13 @@ mininet> h1 iperf -c h4 -b 2.5MB -t 10 -i 1
 Start listening on the h5 as server and use h2 as client:
 ```bash
 mininet> h5 iperf -s -b 2.5M &
-mininet> h2 iperf -c h5 -b 2.5MB -t 10 -i 1
+mininet> h2 iperf -c h5 -b 2.5M -t 10 -i 1
 ```
 
 Start listening on the h6 as server and use h3 as client:
 ```bash
 mininet> h6 iperf -s -b 3.5M &
-mininet> h3 iperf -c h6 -b 3.5MB -t 10 -i 1
+mininet> h3 iperf -c h6 -b 3.5M -t 10 -i 1
 ```
 
 
